@@ -53,7 +53,7 @@ public class EmployeeJPATest {
     @Test
     public void should_return_employee_given_character_in_name_and_salary_large_than() throws Exception {
         //2.找出Employee表中第一个姓名包含`n`字符的雇员所有个人信息
-        Employee expectedEmployee = new Employee(1,"xiaohong",19,"female",1,7000);
+        Employee expectedEmployee = new Employee(0,"xiaoming",20,"male",0,6000);
         Employee employee = employeeRepository.findFirstByNameContaining("n");
         String actualName = employee.getName();
         assertThat(actualName).isEqualTo(expectedEmployee.getName());
@@ -81,7 +81,7 @@ public class EmployeeJPATest {
     public void should_return_company_name_when_input_employee_name() throws Exception {
         //5.查找xiaohong的所在的公司的公司名称
         String expectedCompanyName = "alibaba";
-        String actualCompanyName = null;
+        String actualCompanyName = employeeRepository.findCompanyNameByEmployeeName("xiaohong");
         assertThat(actualCompanyName).isEqualTo(expectedCompanyName);
     }
 
@@ -97,7 +97,8 @@ public class EmployeeJPATest {
     public void should_deleted_employee_when_given_employee_name() throws Exception {
         //7.删除姓名是xiaohong的employee
         Employee expectedEmployee = new Employee(1,"xiaohong",19,"female",1,7000);
-        Employee actualEmployee = null;
+        employeeRepository.deleteByName(expectedEmployee.getName());
+        Employee actualEmployee = employeeRepository.findFirstByNameIs("xiaohong");
         assertThat(actualEmployee).isNull();
     }
 }
