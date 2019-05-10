@@ -2,13 +2,12 @@ package com.example.employee.repository;
 
 import com.example.employee.entity.Employee;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
-import java.awt.print.Pageable;
 
 @Repository
 public interface EmployeeRepository extends JpaRepository<Employee, Long> {
@@ -20,8 +19,11 @@ public interface EmployeeRepository extends JpaRepository<Employee, Long> {
     //2.找出Employee表中第一个姓名包含`*`字符并且薪资大于*的雇员个人信息
     Employee findFirstByNameLikeAndSalaryGreaterThan(String name, int salary);
 
+    //2.1 找出找出Employee表中第一个姓名包含`n`字符的雇员所有个人信息
+    Employee findFirstByNameContaining(String nameContains);
+
     //3.找出一个薪资最高且公司ID是*的雇员以及该雇员的姓名
-    Employee findTopBySalaryAndIdIs(int salary, int id);
+    Employee findTopByIdOrderBySalaryDesc(int id);
 
     //4.实现对Employee的分页查询，每页两个数据
     Page<Employee> findAll(Pageable pageable);

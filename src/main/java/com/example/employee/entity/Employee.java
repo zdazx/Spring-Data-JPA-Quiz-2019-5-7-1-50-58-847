@@ -1,6 +1,5 @@
 package com.example.employee.entity;
 
-import org.springframework.data.annotation.Id;
 
 import javax.persistence.*;
 
@@ -8,7 +7,7 @@ import javax.persistence.*;
 @Table(name = "Employee")
 public class Employee {
 
-    @Id
+    @javax.persistence.Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -27,6 +26,9 @@ public class Employee {
 
     @Column(name = "salary")
     private int salary;
+
+    public Employee() {
+    }
 
     public Employee(int id, String name, int age, String gender, int companyId, int salary) {
         this.id = id;
