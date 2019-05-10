@@ -19,7 +19,7 @@ public interface EmployeeRepository extends JpaRepository<Employee, Long> {
     //2.找出Employee表中第一个姓名包含`*`字符并且薪资大于*的雇员个人信息
     Employee findFirstByNameLikeAndSalaryGreaterThan(String name, int salary);
 
-    //2.1 找出找出Employee表中第一个姓名包含`n`字符的雇员所有个人信息
+    //2.1 找出找出Employee表中第一个姓名包含`*`字符的雇员所有个人信息
     Employee findFirstByNameContaining(String nameContains);
 
     //3.找出一个薪资最高且公司ID是*的雇员以及该雇员的姓名
